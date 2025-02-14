@@ -10,10 +10,12 @@ npm install
 
 npm run build
 
-php artisan migrate --seed 
+php artisan key:generate --ansi
+
+php artisan migrate --graceful --ansi
+php artisan migrate:fresh --seed 
 
 php artisan serve 
-
 
 open web page http://127.0.0.1:8000/admin  ~or whatever the server says + admin
 
