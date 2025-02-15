@@ -28,5 +28,50 @@ password:  asdf
 
 ### Outline
 
+This project extends the initial Laravel 11 and Filament 3.x setup by implementing the following features:
 
-### Other Notes / Questions/ Comments
+- **User Management**
+    - Added `user_type` column to the `users` table (Admin, Staff, Client).
+    - Enum `UserTypeEnum` is used for type safety.
+    - Filament resource for Users with filtering and badge display for user types.
+
+- **Organizations**
+    - Model: `Organization`
+    - Organizations can have multiple `Staff` users.
+    - Organizations have many Companies.
+
+- **Companies**
+    - Model: `Company`
+    - Companies must belong to exactly one Organization.
+    - Companies can have multiple `Client` users.
+
+- **Database Migrations & Seeding**
+    - Seeders create:
+        - **Admin user (`admin@ex.io`) is created if missing**
+        - **20 Staff users**
+        - **200 Client users**
+        - **5 Organizations**
+        - **30 Companies**
+
+- **Filament Integration**
+    - Resources for Users, Organizations, and Companies.
+    - Relationship management between Companies ↔ Users & Organizations ↔ Staff Users.
+    - Deleting Companies and Organizations also removes related records.
+
+- **UI Enhancements**
+    - User types displayed as **badges** with distinct colors.
+    - Live notifications when a new user is created.
+    - Forms reset when creating new users.
+
+- **Bonus Feature: Version Widget**
+    - Added a Filament dashboard widget displaying application version.
+    - Version is stored in `config/cw.php` as `Version 1.02.03`.
+    - Uses `APP_NAME` from `.env`.
+
+---
+
+### Other Notes / Questions / Comments
+
+- If you experience issues with migrations, try:
+  ```bash
+  php artisan migrate:fresh --seed
