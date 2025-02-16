@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->after('email', function (Blueprint $table) {
-                $table->enum('user_type', ['ADMIN','STAFF','CLIENT']);
+        Schema::table('organizations', function (Blueprint $table) {
+            $table->after('id', function (Blueprint $table) {
+                $table->string('uid')->unique();
             });
         });
-}
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('user_type');
+        Schema::table('organizations', function (Blueprint $table) {
+            $table->dropColumn('uid');
         });
     }
 };

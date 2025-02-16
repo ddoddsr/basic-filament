@@ -4,17 +4,15 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\TypeUserEnum;
+use App\Traits\SetDefaultUid;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SetDefaultUid;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +20,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'uid',
         'name',
         'email',
         'password',
@@ -50,6 +49,16 @@ class User extends Authenticatable
             'password' => 'hashed',
             'user_type' => TypeUserEnum::class
         ];
+    }
+
+    /**
+     * Define default route key
+     *
+     * @return null|string
+     */
+    public function getRouteKeyName(): ?string
+    {
+        return 'uid';
     }
 
     /**

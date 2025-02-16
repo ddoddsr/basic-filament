@@ -18,6 +18,7 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
+            'uid' => uniqid(),
             'name' => $this->faker->company(),
             'organization_id' => Organization::factory(),
         ];

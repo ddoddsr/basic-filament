@@ -16,8 +16,13 @@ use Illuminate\Database\Eloquent\Builder;
 class OrganizationResource extends Resource
 {
     protected static ?string $model = Organization::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
+
+    public static function getRecordRouteKeyName(): ?string
+    {
+        return 'uid';
+    }
+
 
     public static function form(Form $form): Form
     {
@@ -46,7 +51,6 @@ class OrganizationResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->label('ID')->sortable(),
                 TextColumn::make('name')->label('Name')->searchable(),
                 TextColumn::make('staff_users_count')
                     ->label('Staff Members')

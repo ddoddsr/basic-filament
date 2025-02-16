@@ -13,8 +13,12 @@ use Filament\Tables\Table;
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
+    public static function getRecordRouteKeyName(): ?string
+    {
+        return 'uid';
+    }
 
     public static function form(Form $form): Form
     {
@@ -74,6 +78,7 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
             [
                 'email' => 'admin@ex.io'
             ],[
+                'uid' => uniqid(),
                 'name' => 'Test User',
                 'password' => bcrypt('asdf'),
                 'user_type' => 'ADMIN',

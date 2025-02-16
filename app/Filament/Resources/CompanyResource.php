@@ -19,8 +19,12 @@ use Illuminate\Database\Eloquent\Builder;
 class CompanyResource extends Resource
 {
     protected static ?string $model = Company::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
+
+    public static function getRecordRouteKeyName(): ?string
+    {
+        return 'uid';
+    }
 
     public static function form(Form $form): Form
     {
@@ -56,7 +60,6 @@ class CompanyResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->label('ID')->sortable(),
                 TextColumn::make('name')->label('Name')->searchable(),
                 TextColumn::make('organization.name')->label('Organization')->sortable(),
                 TextColumn::make('clients_count')
